@@ -1,3 +1,4 @@
+import Separator from "@/components/separator";
 import { TransactionItem } from "@/components/transaction-item";
 import TransactionSummaryItem from "@/components/transaction-summary-item";
 
@@ -23,9 +24,7 @@ const groupAndSumTransactionsByDate = (transactions) => {
 
 const TransactionList = async () => {
   const response = await fetch("http://localhost:3100/transactions");
-
   const transactions = await response.json();
-
   const grouped = groupAndSumTransactionsByDate(transactions);
 
   return (
@@ -33,7 +32,7 @@ const TransactionList = async () => {
       {Object.entries(grouped).map(([date, { transactions, amount }]) => (
         <div key={date}>
           <TransactionSummaryItem date={date} amount={amount} />
-          <hr className="mb-4 border-gray-200 dark:border-gray-800" />
+          <Separator />
           <section className="space-y-4">
             {transactions.map((transaction) => (
               <div key={transaction.id}>

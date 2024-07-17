@@ -35,7 +35,7 @@ export const TransactionItem = ({ type, category, description, amount }) => {
 
       <div className="min-w-[150px] items-center hidden md:flex">
         {category && (
-          <div className="rounded-md tetx-sm bg-gray-700 dark:bg-gray-100 text-gray-100 dark:text-black px-2 py-0.5">
+          <div className="rounded-md text-sm bg-gray-700 dark:bg-gray-100 text-gray-100 dark:text-black px-2 py-0.5">
             {category}
           </div>
         )}
