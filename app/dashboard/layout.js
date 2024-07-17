@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
     <>
       <PageHeader className="my-8" />
       <main>{children}</main>
-      <footer>footer</footer>
+      <footer className="mt-auto text-center py-8">footer</footer>
     </>
   );
 };

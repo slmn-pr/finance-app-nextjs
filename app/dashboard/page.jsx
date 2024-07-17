@@ -1,7 +1,13 @@
 import React from "react";
+import TransactionList from "./components/transaction-list";
 
 const Page = () => {
-  return <>Hello from the dashboard</>;
+  return <>
+  
+
+    <TransactionList />
+  
+  </>;
 };
 
 export default Page;
