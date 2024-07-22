@@ -7,6 +7,7 @@ import { categories, types } from "@/lib/consts";
 const TransactionForm = () => {
   return (
     <form className="space-y-4">
+      {/* Form body */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Type */}
         <div>
