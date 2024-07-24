@@ -10,13 +10,15 @@
     "json-server": "json-server --watch db.json --port 3100 --delay=3000"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "json-server": "^0.17.4",
     "lucide-react": "^0.396.0",
     "next": "14.2.4",
     "react": "^18",
     "react-cookie": "^7.1.4",
     "react-dom": "^18",
-    "react-hook-form": "^7.52.1"
+    "react-hook-form": "^7.52.1",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
