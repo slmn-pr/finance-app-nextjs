@@ -8,22 +8,49 @@ import { categories, types } from "@/lib/consts";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { transactionSchema } from "@/lib/validation";
+import { useState } from "react";
+import { purgeTransactionListCache } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 const ErrorMessage = ({ error }) => {
   return <p className="mt-1 text-red-500">{error}</p>;
 };
 
 const TransactionForm = () => {
+  const router = useRouter();
+  const [isSaving, setIsSaving] = useState(false);
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
     resolver: zodResolver(transactionSchema),
   });
 
-  const onSubmit = (data) => console.log("⭐", data);
+  const onSubmit = async (data) => {
+    setIsSaving(true);
+
+    try {
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/transactions`;
+      await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          created_at: `${data.date}T00:00:00`,
+        }),
+      });
+      await purgeTransactionListCache();
+      router.push("/dashboard");
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   return (
     <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
@@ -77,7 +104,9 @@ const TransactionForm = () => {
       </div>
 
       <div className="flex justify-end">
-        <Button type="submit">Save</Button>
+        <Button type="submit" disabled={isSaving}>
+          Save
+        </Button>
       </div>
     </form>
   );

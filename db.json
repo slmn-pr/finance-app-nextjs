@@ -31,9 +31,53 @@
       "description": "Rent",
       "category": "Housing",
       "created_at": "2023-10-15T23:00:00"
+    },
+    {
+      "type": "Investment",
+      "category": "Other",
+      "amount": 10000,
+      "description": "This is first investment ⚡⭐",
+      "date": "2002-01-02",
+      "created_at": "undefinedT00:00:00",
+      "id": 5
+    },
+    {
+      "type": "Expense",
+      "category": "Housing",
+      "amount": 100,
+      "description": "Ice cream 🍧🍦",
+      "date": "2002-01-02",
+      "created_at": "undefinedT00:00:00",
+      "id": 6
+    },
+    {
+      "type": "Expense",
+      "category": "Housing",
+      "amount": 1578,
+      "description": "Rent",
+      "date": "2002-01-02",
+      "created_at": "undefinedT00:00:00",
+      "id": 7
+    },
+    {
+      "type": "Income",
+      "category": "Food",
+      "amount": 589,
+      "description": "First date 💖",
+      "date": "2002-01-02",
+      "created_at": "2002-01-02T00:00:00",
+      "id": 8
+    },
+    {
+      "type": "Saving",
+      "category": "Other",
+      "amount": 123,
+      "description": "Save money 🤑💵💶",
+      "date": "2002-01-03",
+      "created_at": "2002-01-03T00:00:00",
+      "id": 9
     }
   ],
-
   "trends": [
     {
       "id": "Income",
@@ -45,7 +89,6 @@
       "amount": 4000,
       "preAmount": 3000
     },
-
     {
       "id": "Saving",
       "amount": 4000,

@@ -8,7 +8,7 @@ import { PlusCircle } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 
 const Page = async () => {
-  const result = await fetch("http://localhost:3100/trends");
+  const result = await fetch(`${process.env.API_URL}/trends`);
 
   return (
     <>
