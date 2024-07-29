@@ -76,7 +76,7 @@ const TransactionForm = () => {
         <div>
           <Label className="mb-1">Transaction Date</Label>
           <Input {...register("date")} />
-          <FormError error={errors.date.message} />
+          <FormError error={errors.date?.message} />
         </div>
 
         {/* Transaction Amount */}
@@ -84,7 +84,7 @@ const TransactionForm = () => {
           <Label className="mb-1">Amount</Label>
           <Input type="number" {...register("amount")} />
 
-          <FormError error={errors.amount.message} />
+          <FormError error={errors.amount?.message} />
         </div>
 
         {/* Description */}
@@ -93,7 +93,7 @@ const TransactionForm = () => {
           <Input {...register("description")} />
 
           {errors.description && (
-            <FormError error={errors.description.message} />
+            <FormError error={errors.description?.message} />
           )}
         </div>
       </div>
