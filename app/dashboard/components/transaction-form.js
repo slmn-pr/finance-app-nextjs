@@ -11,10 +11,7 @@ import { transactionSchema } from "@/lib/validation";
 import { useState } from "react";
 import { purgeTransactionListCache } from "@/lib/actions";
 import { useRouter } from "next/navigation";
-
-const ErrorMessage = ({ error }) => {
-  return <p className="mt-1 text-red-500">{error}</p>;
-};
+import FormError from "@/components/forms/form-error";
 
 const TransactionForm = () => {
   const router = useRouter();
@@ -23,7 +20,6 @@ const TransactionForm = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
@@ -80,8 +76,7 @@ const TransactionForm = () => {
         <div>
           <Label className="mb-1">Transaction Date</Label>
           <Input {...register("date")} />
-
-          {errors.date && <ErrorMessage error={errors.date.message} />}
+          <FormError error={errors.date.message} />
         </div>
 
         {/* Transaction Amount */}
@@ -89,7 +84,7 @@ const TransactionForm = () => {
           <Label className="mb-1">Amount</Label>
           <Input type="number" {...register("amount")} />
 
-          {errors.amount && <ErrorMessage error={errors.amount.message} />}
+          <FormError error={errors.amount.message} />
         </div>
 
         {/* Description */}
@@ -98,7 +93,7 @@ const TransactionForm = () => {
           <Input {...register("description")} />
 
           {errors.description && (
-            <ErrorMessage error={errors.description.message} />
+            <FormError error={errors.description.message} />
           )}
         </div>
       </div>
