@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { transactionSchema } from "@/lib/validation";
 import { useState } from "react";
-import { purgeTransactionListCache } from "@/lib/actions";
+import { createTransaction } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import FormError from "@/components/forms/form-error";
 
@@ -17,32 +17,28 @@ const TransactionForm = () => {
   const router = useRouter();
   const [isSaving, setIsSaving] = useState(false);
 
+  const [lastError, setLastError] = useState(null);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
-    resolver: zodResolver(transactionSchema),
+    // resolver: zodResolver(transactionSchema),
   });
 
   const onSubmit = async (data) => {
+    console.log("Onsubmit", data);
     setIsSaving(true);
+    setLastError(null);
 
     try {
-      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/transactions`;
-      await fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-          created_at: `${data.date}T00:00:00`,
-        }),
-      });
-      await purgeTransactionListCache();
+      await createTransaction(data);
       router.push("/dashboard");
+    } catch (error) {
+      console.error(error);
+      setLastError(error.message);
     } finally {
       setIsSaving(false);
     }
@@ -75,8 +71,8 @@ const TransactionForm = () => {
         {/* Transaction Date */}
         <div>
           <Label className="mb-1">Transaction Date</Label>
-          <Input {...register("date")} />
-          <FormError error={errors.date?.message} />
+          <Input {...register("created_at")} />
+          <FormError error={errors.created_at?.message} />
         </div>
 
         {/* Transaction Amount */}
@@ -98,7 +94,9 @@ const TransactionForm = () => {
         </div>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex justify-between items-center">
+        <div>{lastError && <FormError error={lastError} />}</div>
+
         <Button type="submit" disabled={isSaving}>
           Save
         </Button>

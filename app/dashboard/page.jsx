@@ -13,8 +13,6 @@ const Page = async () => {
 
   const client = createClient();
 
-  console.log(await client.from("transactions").select());
-
   return (
     <>
       <section className="mb-8">
