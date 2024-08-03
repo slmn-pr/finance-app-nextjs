@@ -1,36 +1,25 @@
 import React, { Suspense } from "react";
 import TransactionList from "./components/transaction-list";
 import TransactionListFallback from "./components/transaction-list-fallback";
-import Trend from "./components/trend";
-import TrendFallback from "./components/trend-fallback";
+
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
-import { createClient } from "@/lib/supabase/server";
+import TrendsList from "./components/trends-list";
+import Range from "./components/range";
 
-const Page = async () => {
-  // const result = await fetch(`${process.env.API_URL}/trends`);
-
-  const client = createClient();
-
+const Page = () => {
   return (
     <>
-      <section className="mb-8">
+      <section className="mb-8 flex justify-between items-center">
         <h1 className="text-4xl font-semibold">Summary</h1>
+
+        <div>
+          <Range />
+        </div>
       </section>
       <section className="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
-        <Suspense fallback={<TrendFallback />}>
-          <Trend type="Income" />
-        </Suspense>
-        <Suspense fallback={<TrendFallback />}>
-          <Trend type="Expense" />
-        </Suspense>
-        <Suspense fallback={<TrendFallback />}>
-          <Trend type="Saving" />
-        </Suspense>
-        <Suspense fallback={<TrendFallback />}>
-          <Trend type="Investment" />
-        </Suspense>
+        <TrendsList />
       </section>
 
       <section className="flex justify-between items-center mb-8">

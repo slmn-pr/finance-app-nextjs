@@ -14,22 +14,23 @@ import { useRouter } from "next/navigation";
 import FormError from "@/components/forms/form-error";
 
 const TransactionForm = () => {
-  const router = useRouter();
-  const [isSaving, setIsSaving] = useState(false);
-
-  const [lastError, setLastError] = useState(null);
-
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    setValue,
   } = useForm({
     mode: "onTouched",
-    // resolver: zodResolver(transactionSchema),
+    resolver: zodResolver(transactionSchema),
   });
+  const router = useRouter();
+
+  const [isSaving, setIsSaving] = useState(false);
+  const [lastError, setLastError] = useState(null);
+  const type = watch("type");
 
   const onSubmit = async (data) => {
-    console.log("Onsubmit", data);
     setIsSaving(true);
     setLastError(null);
 
@@ -51,7 +52,15 @@ const TransactionForm = () => {
         {/* Type */}
         <div>
           <Label className="mb-1">Type</Label>
-          <Select {...register("type")}>
+          <Select
+            {...register("type", {
+              onChange: (e) => {
+                if (e.target.value !== "Expense") {
+                  setValue("category", undefined);
+                }
+              },
+            })}
+          >
             {types.map((type) => (
               <option key={type}>{type}</option>
             ))}
@@ -61,11 +70,14 @@ const TransactionForm = () => {
         {/* Categories */}
         <div>
           <Label className="mb-1">Category</Label>
-          <Select {...register("category")}>
+          <Select {...register("category")} disabled={type !== "Expense"}>
+            <option value="">Select a category</option>
+
             {categories.map((category) => (
               <option key={category}>{category}</option>
             ))}
           </Select>
+          <FormError error={errors.category?.message} />
         </div>
 
         {/* Transaction Date */}
