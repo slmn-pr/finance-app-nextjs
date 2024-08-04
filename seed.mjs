@@ -24,7 +24,7 @@ const types = ["Income", "Expense", "Investment", "Saving"];
 async function seed() {
   let transactions = [];
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 1000; i++) {
     const created_at = faker.date.past();
 
     let category = faker.helpers.arrayElement(categories);
@@ -61,7 +61,7 @@ async function seed() {
   const { error } = await supabase.from("transactions").insert(transactions);
 
   if (error) {
-    console.error("Error inserting data");
+    console.error("Error inserting data", error);
   } else {
     console.log("Data inserted");
   }

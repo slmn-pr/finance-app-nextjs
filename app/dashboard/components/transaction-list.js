@@ -16,7 +16,9 @@ const groupAndSumTransactionsByDate = (transactions) => {
 
     // Calculate sum of amounts 🧮
     const amount =
-      transaction.type === "Expense" ? -transaction.amount : transaction.amount;
+      transaction.type === "Expense"
+        ? -transaction.amount
+        : +transaction.amount;
     grouped[date].amount += amount;
   }
 

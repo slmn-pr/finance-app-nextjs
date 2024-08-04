@@ -7,8 +7,12 @@ import { PlusCircle } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 import TrendsList from "./components/trends-list";
 import Range from "./components/range";
+// import { useSearchParams } from "next/navigation";
 
-const Page = () => {
+const Page = ({ searchParams }) => {
+  console.log("SE", searchParams);
+  console.log("Hi");
+  const range = searchParams?.range ?? "last30days";
   return (
     <>
       <section className="mb-8 flex justify-between items-center">
@@ -19,7 +23,7 @@ const Page = () => {
         </div>
       </section>
       <section className="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
-        <TrendsList />
+        <TrendsList range={range} />
       </section>
 
       <section className="flex justify-between items-center mb-8">
