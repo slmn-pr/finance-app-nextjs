@@ -1,6 +1,3 @@
--- Supabase AI is experimental and may produce incorrect answers
--- Always verify the output before executing
-
 create or replace function calculate_total (
   range_arg varchar default 'last30days',
   type_arg varchar default null

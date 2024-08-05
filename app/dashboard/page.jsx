@@ -1,28 +1,25 @@
 import React, { Suspense } from "react";
-import TransactionList from "./components/transaction-list";
 import TransactionListFallback from "./components/transaction-list-fallback";
-
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 import TrendsList from "./components/trends-list";
 import Range from "./components/range";
-// import { useSearchParams } from "next/navigation";
+import TransactionListWrapper from "./components/transaction-list-wrapper";
 
 const Page = ({ searchParams }) => {
-  console.log("SE", searchParams);
-  console.log("Hi");
   const range = searchParams?.range ?? "last30days";
   return (
-    <>
-      <section className="mb-8 flex justify-between items-center">
+    <div className="space-y-8">
+      <section className="flex justify-between items-center">
         <h1 className="text-4xl font-semibold">Summary</h1>
 
         <div>
           <Range />
         </div>
       </section>
-      <section className="mb-8 grid grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-8">
         <TrendsList range={range} />
       </section>
 
@@ -39,9 +36,9 @@ const Page = ({ searchParams }) => {
       </section>
 
       <Suspense fallback={<TransactionListFallback />}>
-        <TransactionList />
+        <TransactionListWrapper range={range} />
       </Suspense>
-    </>
+    </div>
   );
 };
 
