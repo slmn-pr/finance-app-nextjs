@@ -5,7 +5,7 @@ const Button = (props) => {
   return (
     <button
       {...props}
-      className={`${
+      className={`disabled:cursor-not-allowed ${
         props.variant ? variants[props.variant] : variants["default"]
       } ${props.size ? sizes[props.size] : sizes["base"]}`}
     >

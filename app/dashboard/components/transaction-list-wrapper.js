@@ -4,7 +4,13 @@ import { fetchTransactions } from "@/lib/actions";
 
 const TransactionListWrapper = async ({ range }) => {
   const transactions = await fetchTransactions(range);
-  return <TransactionList initialTransactions={transactions} />;
+  return (
+    <TransactionList
+      initialTransactions={transactions}
+      range={range}
+      key={range}
+    />
+  );
 };
 
 export default TransactionListWrapper;
