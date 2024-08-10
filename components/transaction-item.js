@@ -1,7 +1,22 @@
 import { useFormatCurrency } from "@/hooks/use-format-currency";
-import { HandCoins, Landmark, PiggyBank, Wallet } from "lucide-react";
+import {
+  BadgeX,
+  HandCoins,
+  Landmark,
+  Pencil,
+  PiggyBank,
+  Wallet,
+} from "lucide-react";
+import TransactionItemRemoveButton from "./transaction-item-remove-button";
 
-export const TransactionItem = ({ type, category, description, amount }) => {
+export const TransactionItem = ({
+  id,
+  type,
+  category,
+  description,
+  amount,
+  onRemoved,
+}) => {
   const formattedAmount = useFormatCurrency(amount);
 
   const typesMap = {
@@ -28,11 +43,13 @@ export const TransactionItem = ({ type, category, description, amount }) => {
 
   return (
     <div className="w-full flex items-center">
+      {/* Description */}
       <div className="flex items-center mr-4 grow">
         <IconComponent className={`${colors} mr-2 size-4 hidden sm:block`} />
         <span>{description}</span>
       </div>
 
+      {/* Category */}
       <div className="min-w-[150px] items-center hidden md:flex">
         {category && (
           <div className="rounded-md text-sm bg-gray-700 dark:bg-gray-100 text-gray-100 dark:text-black px-2 py-0.5">
@@ -41,9 +58,13 @@ export const TransactionItem = ({ type, category, description, amount }) => {
         )}
       </div>
 
+      {/* Date */}
       <div className="min-w-[70px] text-right">{formattedAmount}</div>
 
-      <div className="min-w-[50px] flex justify-end">...</div>
+      {/* Edit & delete section */}
+      <div className="min-w-[100px] flex justify-end">
+        <TransactionItemRemoveButton id={id} onRemoved={onRemoved} />
+      </div>
     </div>
   );
 };
