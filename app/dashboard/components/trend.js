@@ -10,8 +10,6 @@ const Trend = async ({ type, range }) => {
     range_arg: range,
   });
   if (error) console.error(error);
-  // throw new Error("Something wrong!")
-  else console.log(data);
 
   const amount = data?.length ? data[0].current_amount : 0;
   const prevAmount = data?.length ? data[0].previous_amount : 0;

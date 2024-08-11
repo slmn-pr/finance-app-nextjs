@@ -8,6 +8,8 @@ import {
   Wallet,
 } from "lucide-react";
 import TransactionItemRemoveButton from "./transaction-item-remove-button";
+import Link from "next/link";
+import { sizes, variants } from "@/lib/variants";
 
 export const TransactionItem = ({
   id,
@@ -63,6 +65,13 @@ export const TransactionItem = ({
 
       {/* Edit & delete section */}
       <div className="min-w-[100px] flex justify-end">
+        <Link
+          href={`dashboard/transaction/${id}/edit`}
+          className={`${variants.ghost} ${sizes.xs}`}
+        >
+          <Pencil size={20} />
+        </Link>
+
         <TransactionItemRemoveButton id={id} onRemoved={onRemoved} />
       </div>
     </div>

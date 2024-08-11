@@ -13,23 +13,26 @@ const TransactionList = ({ range, initialTransactions }) => {
   const [transactions, setTransactions] = useState(initialTransactions);
   const grouped = groupAndSumTransactionsByDate(transactions);
 
-  const [offset, setOffset] = useState(initialTransactions.length);
   const [loading, setLoading] = useState(false);
 
   const [buttonHidden, setButtonHidden] = useState(
     initialTransactions.length === 0
   );
 
-  const handleClick = async (e) => {
+  const handleClick = async () => {
     setLoading(true);
 
     let nextTransactions = null;
 
     try {
-      nextTransactions = await fetchTransactions(range, offset, 10);
+      nextTransactions = await fetchTransactions(
+        range,
+        transactions.length,
+        10
+      );
 
       setButtonHidden(nextTransactions.length === 0);
-      setOffset((prev) => prev + 10);
+
       setTransactions((prev) => [...prev, ...nextTransactions]);
     } finally {
       setLoading(false);

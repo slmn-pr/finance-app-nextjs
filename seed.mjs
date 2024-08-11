@@ -56,14 +56,10 @@ async function seed() {
     });
   }
 
-  console.log("Transactions", transactions);
-
   const { error } = await supabase.from("transactions").insert(transactions);
 
   if (error) {
     console.error("Error inserting data", error);
-  } else {
-    console.log("Data inserted");
   }
 }
 
