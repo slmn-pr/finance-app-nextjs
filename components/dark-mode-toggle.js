@@ -9,8 +9,8 @@ const DarkModeToggle = ({ defaultMode = "dark" }) => {
 
   return (
     <Button variant="ghost" size="sm" onClick={toggleTheme}>
-      {theme === "light" && <Moon className="size-4" />}
-      {theme === "dark" && <Sun className="size-4" />}
+      {theme === "light" && <Moon className="size-6" />}
+      {theme === "dark" && <Sun className="size-6" />}
     </Button>
   );
 };
