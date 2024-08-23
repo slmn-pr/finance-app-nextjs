@@ -33,14 +33,13 @@ const PageHeader = async ({ className }) => {
 
         {user && (
           <>
-            <Button
-              variant="ghost"
-              size="sm"
-              className="flex items-center space-x-1"
+            <Link
+              href="/dashboard/settings"
+              className={`${sizes.sm} ${variants.ghost} flex items-center space-x-1`}
             >
               <CircleUser className="size-6" />
               <span>{user.email}</span>
-            </Button>
+            </Link>
 
             <SignOutButton />
           </>
