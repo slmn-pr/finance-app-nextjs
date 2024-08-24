@@ -8,6 +8,7 @@ import Button from "./button";
 import { CircleUser, KeyRound } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 import SignOutButton from "./sign-out-button";
+import Avatar from "./avatar";
 
 const PageHeader = async ({ className }) => {
   const theme = useServerDarkMode();
@@ -18,6 +19,8 @@ const PageHeader = async ({ className }) => {
     data: { user },
     error,
   } = await supabase.auth.getUser();
+
+  console.log(user);
 
   return (
     <header className={`flex justify-between items-center ${className}`}>
@@ -37,7 +40,7 @@ const PageHeader = async ({ className }) => {
               href="/dashboard/settings"
               className={`${sizes.sm} ${variants.ghost} flex items-center space-x-1`}
             >
-              <CircleUser className="size-6" />
+              <Avatar />
               <span>{user.email}</span>
             </Link>
 
