@@ -5,9 +5,10 @@ import Loading from "./loading";
 const Layout = ({ children }) => {
   return (
     <div className="grid grid-cols-4 gap-8">
-      <SideNav />
-
-      <div className="col-span-3">
+      <aside className="col-span-4 lg:col-span-1">
+        <SideNav />
+      </aside>
+      <div className="col-span-4 lg:col-span-3">
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </div>
     </div>

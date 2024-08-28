@@ -1,15 +1,15 @@
 "use client";
 
-import Select from "@/components/forms/select";
+import DateRangeSelect from "@/components/forms/date-range-select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-const Range = () => {
+const Range = ({ defaultValue }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const range = searchParams.get("range") ?? "last30days";
+  const range = searchParams.get("range") ?? defaultValue ?? "last30days";
 
   const handleChange = (e) => {
     const params = new URLSearchParams();
@@ -18,12 +18,11 @@ const Range = () => {
   };
 
   return (
-    <Select value={range} onChange={handleChange}>
-      <option value="last24hours">Last 24 hours</option>
-      <option value="last7days">Last 7 days</option>
-      <option value="last30days">Last 30 days</option>
-      <option value="last12months">Last 12 months</option>
-    </Select>
+    <DateRangeSelect
+      value={range}
+      onChange={handleChange}
+      defaultValue={defaultValue}
+    />
   );
 };
 

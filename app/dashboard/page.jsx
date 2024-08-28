@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, use } from "react";
 import TransactionListFallback from "./components/transaction-list-fallback";
 import Link from "next/link";
 import { PlusCircle } from "lucide-react";
@@ -6,16 +6,26 @@ import { sizes, variants } from "@/lib/variants";
 import TrendsList from "./components/trends-list";
 import Range from "./components/range";
 import TransactionListWrapper from "./components/transaction-list-wrapper";
+import { createClient } from "@/lib/supabase/server";
 
-const Page = ({ searchParams }) => {
-  const range = searchParams?.range ?? "last30days";
+const Page = async ({ searchParams }) => {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const defaultRange = user?.user_metadata.defaultView;
+
+  const range = defaultRange || searchParams?.range || "last30days";
+
   return (
     <div className="space-y-8">
       <section className="flex justify-between items-center">
         <h1 className="text-4xl font-semibold">Summary</h1>
 
         <div>
-          <Range />
+          <Range defaultValue={defaultRange} />
         </div>
       </section>
 

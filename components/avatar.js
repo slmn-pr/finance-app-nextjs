@@ -19,7 +19,7 @@ const Avatar = async ({ width = 32, height = 32 }) => {
 
   const { data: imageData, error } = await supabse.storage
     .from("avatars")
-    .createSignedUrl(user.user_metadata?.avatar, expireTime);
+    .createSignedUrl(user?.user_metadata?.avatar, expireTime);
 
   if (error) {
     return <CircleUser className="size-6" />;

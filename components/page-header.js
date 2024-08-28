@@ -4,8 +4,7 @@ import Link from "next/link";
 import DarkModeToggle from "./dark-mode-toggle";
 import useServerDarkMode from "@/hooks/use-server-dark-mode";
 import { createClient } from "@/lib/supabase/server";
-import Button from "./button";
-import { CircleUser, KeyRound } from "lucide-react";
+import { KeyRound } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 import SignOutButton from "./sign-out-button";
 import Avatar from "./avatar";
@@ -17,10 +16,7 @@ const PageHeader = async ({ className }) => {
 
   const {
     data: { user },
-    error,
   } = await supabase.auth.getUser();
-
-  console.log(user);
 
   return (
     <header className={`flex justify-between items-center ${className}`}>
@@ -41,7 +37,11 @@ const PageHeader = async ({ className }) => {
               className={`${sizes.sm} ${variants.ghost} flex items-center space-x-1`}
             >
               <Avatar />
-              <span>{user.email}</span>
+              <span>
+                {user.user_metadata?.fullName
+                  ? user.user_metadata?.fullName
+                  : user.email}
+              </span>
             </Link>
 
             <SignOutButton />
@@ -53,8 +53,6 @@ const PageHeader = async ({ className }) => {
             <KeyRound className={`size-10 ${variants.ghost} ${sizes.xs}`} />
           </Link>
         )}
-
-        {/* <div>User drop down</div> */}
       </div>
     </header>
   );
