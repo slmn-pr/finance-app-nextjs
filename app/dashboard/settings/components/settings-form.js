@@ -25,6 +25,9 @@ const SettingsForm = ({ defaultSettings }) => {
         <AlertSuccess message="Success ✅" />
       )}
 
+      {/* Display server side error ⚔️🎁 */}
+      {/* .... */}
+
       <Label htmlFor="full-name">User full name</Label>
       <Input
         type="text"
