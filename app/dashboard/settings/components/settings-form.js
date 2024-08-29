@@ -12,6 +12,7 @@ import { useFormState } from "react-dom";
 const initialState = {
   message: "",
   error: false,
+  errors: {},
 };
 const SettingsForm = ({ defaultSettings }) => {
   const [state, formAction] = useFormState(updateSettings, initialState);

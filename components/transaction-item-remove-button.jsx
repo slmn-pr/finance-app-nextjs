@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import Button from "./button";
 import { BadgeX } from "lucide-react";
