@@ -1,6 +1,10 @@
-import { createClient } from "@/lib/supabase/server";
-import Image from "next/image";
+
+import { redirect } from 'next/navigation'
 
 export default async function Home() {
-  return <>Hello</>;
+
+
+  redirect("/dashboard")
+
+  return <>please wait to sent dashboard page</>
 }

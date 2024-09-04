@@ -1,13 +1,12 @@
-// import React from "react";
-
 import Link from "next/link";
 import DarkModeToggle from "./dark-mode-toggle";
 import useServerDarkMode from "@/hooks/use-server-dark-mode";
 import { createClient } from "@/lib/supabase/server";
-import { KeyRound } from "lucide-react";
+import { ChevronLeft, KeyRound } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 import SignOutButton from "./sign-out-button";
 import Avatar from "./avatar";
+import BackButton from "./back-button";
 
 const PageHeader = async ({ className }) => {
   const theme = useServerDarkMode();
@@ -20,12 +19,15 @@ const PageHeader = async ({ className }) => {
 
   return (
     <header className={`flex justify-between items-center ${className}`}>
-      <Link
-        href="/dashboard"
-        className="text-xl hover:underline underline-offset-8 decoration-2"
-      >
-        Finance App
-      </Link>
+      <div className="flex items-center">
+        <BackButton />
+        <Link
+          href="/dashboard"
+          className="text-xl hover:underline underline-offset-8 decoration-2"
+        >
+          Finance App
+        </Link>
+      </div>
 
       <div className="flex items-center">
         <DarkModeToggle defaultMode={theme} />
