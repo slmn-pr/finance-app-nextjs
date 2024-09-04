@@ -2,7 +2,7 @@ import Link from "next/link";
 import DarkModeToggle from "./dark-mode-toggle";
 import useServerDarkMode from "@/hooks/use-server-dark-mode";
 import { createClient } from "@/lib/supabase/server";
-import { ChevronLeft, KeyRound } from "lucide-react";
+import { KeyRound } from "lucide-react";
 import { sizes, variants } from "@/lib/variants";
 import SignOutButton from "./sign-out-button";
 import Avatar from "./avatar";
